@@ -216,7 +216,7 @@ def alter_schema(tables)
     # Create main uuid column in every table
     puts "Creating uuid column in #{tname}"
     begin
-      @conn.exec("ALTER TABLE #{tname} ADD uuid uuid UNIQUE NOT NULL DEFAULT uuid_generate_v1()")
+      @conn.exec("ALTER TABLE #{tname} ADD uuid uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4()")
     rescue => e
       log('C', "Creating uuid column in #{tname}", e.error.strip)
     end
