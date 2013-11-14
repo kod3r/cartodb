@@ -43,6 +43,11 @@ tables = {
              :related => ['user_tables'],
              :singular => 'data_import'
            },
+           :geocodings => {
+             :related => [],
+             :singular => 'geocoding'
+           },
+           :user_tables => {
            :layers => {
              :related => ['layers_maps', 'layers_users', 'layers_user_tables', 'visualizations'],
              :singular => 'layer',
@@ -86,7 +91,7 @@ tables = {
              :relation_for => {'layers_user_tables' => 'user_table'}
            },
            :users => {
-             :related => ['user_tables', 'maps', 'layers_users', 'assets', 'api_keys', 'client_applications', 'oauth_tokens', 'tags', 'data_imports', 'synchronizations'],
+             :related => ['user_tables', 'maps', 'layers_users', 'assets', 'api_keys', 'client_applications', 'oauth_tokens', 'tags', 'data_imports', 'synchronizations', 'geocodings'],
              :singular => 'user'
            },
            #:visualizations => {
