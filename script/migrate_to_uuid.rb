@@ -47,7 +47,6 @@ tables = {
              :related => [],
              :singular => 'geocoding'
            },
-           :user_tables => {
            :layers => {
              :related => ['layers_maps', 'layers_users', 'layers_user_tables', 'visualizations'],
              :singular => 'layer',
