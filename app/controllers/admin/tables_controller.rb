@@ -17,7 +17,7 @@ class Admin::TablesController < ApplicationController
   # if the user is not logged in, we redirect them to the public page
   def show
     if current_user.present?
-      @table = Table.find_by_identifier(current_user.id, params[:id])
+      @table = Table.where(:id => params[:id], :user_id => current_user.id).first
       respond_to do |format|
         format.html
         download_formats @table, format
@@ -29,7 +29,7 @@ class Admin::TablesController < ApplicationController
 
   def public
     @subdomain = request.subdomain
-    @table     = Table.find_by_subdomain(@subdomain, params[:id])
+    @table     = Table.find_by_id_subdomain(@subdomain, params[:id])
 
     # Has quite strange checks to see if a user can access a public table
     if @table.blank? || @table.private? || ((current_user && current_user.id != @table.user_id) && @table.private?)
@@ -50,7 +50,7 @@ class Admin::TablesController < ApplicationController
   def embed_map
     # Code done with ♥ by almost every human being working at @vizzuality
     @subdomain = request.subdomain
-    @table = Table.find_by_subdomain(@subdomain, params[:id])
+    @table = Table.find_by_id_subdomain(@subdomain, params[:id])
 
     if @table.blank? || @table.private?
       respond_to do |format|

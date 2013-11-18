@@ -114,7 +114,7 @@ class Api::Json::TablesController < Api::ApplicationController
   end
 
   def vizzjson
-    @table = Table.find_by_subdomain(request.subdomain, params[:id])
+    @table = Table.find_by_id_subdomain(request.subdomain, params[:id])
     if @table.present? && (@table.public? || (current_user.present? && @table.owner.id == current_user.id))
       response.headers['X-Cache-Channel'] = "#{@table.varnish_key}:vizjson"
       response.headers['Cache-Control']   = "no-cache,max-age=86400,must-revalidate, public"
@@ -127,7 +127,7 @@ class Api::Json::TablesController < Api::ApplicationController
   protected
 
   def load_table
-    @table = Table.find_by_identifier(current_user.id, params[:id])
+    @table = Table.where(:name => params[:id], :user_id => current_user.id).first
   end
 end
 

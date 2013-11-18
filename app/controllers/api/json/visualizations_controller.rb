@@ -50,7 +50,7 @@ class Api::Json::VisualizationsController < Api::ApplicationController
                   ).copy
     elsif params[:tables]
       tables    = params[:tables].map do |table_name| 
-                    ::Table.find_by_subdomain(request.subdomain, table_name)
+                    ::Table.find_by_name_subdomain(request.subdomain, table_name)
                   end
       blender   = Visualization::TableBlender.new(current_user, tables)
       map       = blender.blend

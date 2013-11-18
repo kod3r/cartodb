@@ -20,8 +20,8 @@ module CartoDB
 
       attribute :id,                String
       attribute :name,              String
-      attribute :map_id,            Integer
-      attribute :active_layer_id,   Integer
+      attribute :map_id,            String
+      attribute :active_layer_id,   String
       attribute :type,              String
       attribute :privacy,           String
       attribute :tags,              Array[String], default: []
