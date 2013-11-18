@@ -751,8 +751,8 @@ class User < Sequel::Model
 
   def set_statement_timeouts
     in_database(as: :superuser) do |user_database|
-      user_database["ALTER ROLE ? SET statement_timeout to ?", database_username.lit, user_timeout].all
-      user_database["ALTER DATABASE ? SET statement_timeout to ?", database_name.lit, database_timeout].all
+      user_database["ALTER ROLE \"?\" SET statement_timeout to ?", database_username.lit, user_timeout].all
+      user_database["ALTER DATABASE \"?\" SET statement_timeout to ?", database_name.lit, database_timeout].all
     end
     in_database.disconnect
     in_database.connect(get_db_configuration_for)
