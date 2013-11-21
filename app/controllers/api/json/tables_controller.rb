@@ -127,7 +127,12 @@ class Api::Json::TablesController < Api::ApplicationController
   protected
 
   def load_table
-    @table = Table.where(:name => params[:id], :user_id => current_user.id).first
+    rx = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
+    if rx.match(params[:id])
+      @table = Table.where("user_id = ? AND (name = '?' OR id = '?')", current_user.id, params[:id], params[:id]).first
+    else
+      @table = Table.where(:name => params[:id], :user_id => current_user.id).first
+    end
   end
 end
 
