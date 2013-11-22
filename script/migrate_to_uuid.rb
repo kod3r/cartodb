@@ -27,10 +27,6 @@ end
 @logs = Hash.new
 
 tables = {
-           :api_keys => {
-             :related => [],
-             :singular => 'api_key'
-           },
            :assets => { 
              :related => [],
              :singular => 'asset'
@@ -90,7 +86,7 @@ tables = {
              :relation_for => {'layers_user_tables' => 'user_table'}
            },
            :users => {
-             :related => ['user_tables', 'maps', 'layers_users', 'assets', 'api_keys', 'client_applications', 'oauth_tokens', 'tags', 'data_imports', 'synchronizations', 'geocodings'],
+             :related => ['user_tables', 'maps', 'layers_users', 'assets', 'client_applications', 'oauth_tokens', 'tags', 'data_imports', 'synchronizations', 'geocodings'],
              :singular => 'user'
            },
            #:visualizations => {
